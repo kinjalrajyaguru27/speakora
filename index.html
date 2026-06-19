@@ -291,11 +291,6 @@
       font-size: 14px;
     }
 
-    .g_id_signin {
-      display: flex;
-      justify-content: center;
-      margin-top: 10px;
-    }
 
     /* RESPONSIVE */
     @media (max-width: 860px) {
@@ -356,19 +351,8 @@
             <span class="input-icon">🔒</span>
             <input type="password" id="login-password" placeholder="Password" required>
           </div>
-          <button class="login-btn" onclick="login()">Sign In</button>
+          <button class="login-btn" type="submit">Sign In</button>
         </form>
-
-        <div class="divider">
-          <span>OR</span>
-        </div>
-
-        <div id="g_id_onload" data-client_id="436980802935-b7c21qn5nkcg8it4hpsrq1eqck5h88tr.apps.googleusercontent.com"
-          data-context="signin" data-ux_mode="popup" data-callback="handleCredentialResponse" data-auto_prompt="false">
-        </div>
-        <div class="g_id_signin" data-type="standard" data-size="large" data-theme="outline" data-text="continue_with"
-          data-shape="pill" data-logo_alignment="left" data-width="340">
-        </div>
 
         <p class="signup-link">
           Don't have an account? <a href="register.html">Sign Up</a>
@@ -377,42 +361,6 @@
     </div>
   </div>
 
-  <script src="https://accounts.google.com/gsi/client" async defer></script>
-  <script>
-    // GOOGLE LOGIN HANDLER
-    function handleCredentialResponse(response) {
-      console.log("Encoded JWT ID token: " + response.credential);
-
-      fetch("/api/user/google-login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ token: response.credential })
-      })
-        .then(res => res.json())
-        .then(user => {
-          if (user.message) {
-            alert(user.message); // Error
-          } else {
-            // Success
-            localStorage.setItem("loggedIn", "true");
-            localStorage.setItem("userId", user._id);
-            localStorage.setItem("name", user.name);
-            localStorage.setItem("email", user.email);
-            // Save current language (fallback to first in array or English)
-            localStorage.setItem("language", (user.languages && user.languages.length > 0) ? user.languages[0] : "English");
-            // Save ALL selected languages
-            localStorage.setItem("languages", JSON.stringify(user.languages || []));
-            localStorage.setItem("subscription", user.subscription);
-
-            // NEW: Check for Deletion Grace Period
-            if (typeof handleDeletionGraceCheck === 'function' && !handleDeletionGraceCheck()) return;
-
-            window.location.href = "course.html";
-          }
-        })
-        .catch(err => console.error("Google Login Error:", err));
-    }
-  </script>
 
   <footer>© 2026 Speakora. All rights reserved.</footer>
 

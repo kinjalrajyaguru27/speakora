@@ -372,10 +372,146 @@
             header { padding: 12px 20px; }
             .app-container { margin: 10px auto; width: 98%; border-radius: 20px; }
         }
+
+        /* ===== PREMIUM UPGRADE MODAL ===== */
+        .upgrade-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(15, 23, 42, 0.75);
+            backdrop-filter: blur(12px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.4s ease;
+        }
+
+        .upgrade-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .upgrade-modal {
+            background: white;
+            padding: 40px;
+            border-radius: 28px;
+            max-width: 500px;
+            width: 90%;
+            text-align: center;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transform: scale(0.9);
+            transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .upgrade-overlay.active .upgrade-modal {
+            transform: scale(1);
+        }
+
+        .upgrade-icon {
+            width: 90px;
+            height: 90px;
+            background: linear-gradient(135deg, #f472b6 0%, #db2777 100%);
+            color: white;
+            font-size: 42px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            margin: 0 auto 24px auto;
+            box-shadow: 0 10px 25px rgba(219, 39, 119, 0.35);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); box-shadow: 0 10px 25px rgba(219, 39, 119, 0.35); }
+            50% { transform: scale(1.06); box-shadow: 0 10px 35px rgba(219, 39, 119, 0.55); }
+            100% { transform: scale(1); box-shadow: 0 10px 25px rgba(219, 39, 119, 0.35); }
+        }
+
+        .upgrade-title {
+            font-size: 26px;
+            font-weight: 800;
+            color: #0f172a;
+            margin-bottom: 12px;
+            letter-spacing: -0.5px;
+        }
+
+        .upgrade-desc {
+            font-size: 15px;
+            color: #64748b;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+
+        .upgrade-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .btn-upgrade-now {
+            background: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
+            color: white;
+            border: none;
+            padding: 16px;
+            border-radius: 16px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 10px 20px rgba(99, 102, 241, 0.25);
+            text-decoration: none;
+            display: block;
+        }
+
+        .btn-upgrade-now:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 30px rgba(99, 102, 241, 0.35);
+        }
+
+        .btn-upgrade-cancel {
+            background: #f1f5f9;
+            color: #475569;
+            border: none;
+            padding: 14px;
+            border-radius: 16px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-upgrade-cancel:hover {
+            background: #e2e8f0;
+            color: #334155;
+        }
     </style>
 </head>
 
 <body>
+
+    <!-- Upgrade Plan Modal overlay -->
+    <div id="upgradeOverlay" class="upgrade-overlay">
+        <div class="upgrade-modal">
+            <div class="upgrade-icon">
+                <i class="fas fa-crown"></i>
+            </div>
+            <h3 class="upgrade-title">Upgrade Your Plan</h3>
+            <p class="upgrade-desc">
+                The Intelligent AI Conversation Tutor is a premium feature. Upgrade your plan to get unlimited learning sessions, instant vocabulary definitions, and personalized speech guidance.
+            </p>
+            <div class="upgrade-buttons">
+                <a href="payment.html" class="btn-upgrade-now">Upgrade to Premium</a>
+                <button class="btn-upgrade-cancel" onclick="window.location.href='dashboard.html'">Go Back to Dashboard</button>
+            </div>
+        </div>
+    </div>
 
     <header>
         <div class="logo">
@@ -571,6 +707,14 @@
                 alert("Copied to clipboard!");
             });
         }
+
+        // Check subscription status on page load
+        window.addEventListener('DOMContentLoaded', () => {
+            const subscription = localStorage.getItem("subscription") || "Free";
+            if (subscription === "Free" || subscription.toLowerCase() === "free") {
+                document.getElementById('upgradeOverlay').classList.add('active');
+            }
+        });
     </script>
 </body>
 
