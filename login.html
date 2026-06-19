@@ -3,8 +3,9 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>Speakora | Register</title>
+  <title>Speakora | Login</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="referrer" content="no-referrer-when-downgrade">
 
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap"
     rel="stylesheet">
@@ -37,6 +38,7 @@
       flex-direction: column;
     }
 
+    /* HEADER */
     header {
       background: rgba(255, 255, 255, 0.8);
       backdrop-filter: blur(12px);
@@ -67,7 +69,8 @@
       object-fit: contain;
     }
 
-    .register-wrapper {
+    /* LOGIN BOX */
+    .login-wrapper {
       flex: 1;
       display: flex;
       align-items: center;
@@ -86,7 +89,7 @@
       border: 1px solid var(--glass-border);
       box-shadow: 0 20px 50px rgba(0, 0, 0, 0.08);
       overflow: hidden;
-      min-height: 600px;
+      min-height: 550px;
     }
 
     /* Left Branding Panel */
@@ -190,8 +193,7 @@
 
     .input-group {
       position: relative;
-      margin-bottom: 12px;
-      text-align: left;
+      margin-bottom: 16px;
     }
 
     .input-icon {
@@ -206,7 +208,7 @@
 
     input {
       width: 100%;
-      padding: 14px 16px 14px 45px;
+      padding: 16px 16px 16px 45px;
       border: 1px solid #d1d5db;
       border-radius: 12px;
       font-family: 'Outfit', sans-serif;
@@ -222,16 +224,6 @@
       background: white;
     }
 
-    .error {
-      text-align: left;
-      font-size: 13px;
-      color: #dc2626;
-      margin-bottom: 10px;
-      margin-top: -8px;
-      padding-left: 10px;
-      display: none;
-    }
-
     button {
       width: 100%;
       padding: 16px;
@@ -245,7 +237,6 @@
       cursor: pointer;
       transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
       box-shadow: 0 4px 10px rgba(79, 70, 229, 0.2);
-      margin-top: 10px;
     }
 
     button:hover {
@@ -254,24 +245,44 @@
       box-shadow: 0 8px 20px rgba(79, 70, 229, 0.3);
     }
 
-    .login-link {
+    .divider {
+      margin: 24px 0;
+      font-size: 14px;
+      color: var(--text-light);
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+    }
+
+    .divider::before,
+    .divider::after {
+      content: "";
+      height: 1px;
+      background: #e5e7eb;
+      flex: 1;
+    }
+
+    .signup-link {
       margin-top: 24px;
       font-size: 15px;
       color: var(--text-main);
     }
 
-    .login-link a {
+    .signup-link a {
       color: var(--primary);
       text-decoration: none;
       font-weight: 700;
       transition: color 0.2s;
     }
 
-    .login-link a:hover {
+    .signup-link a:hover {
       color: var(--primary-hover);
       text-decoration: underline;
     }
 
+    /* FOOTER */
     footer {
       text-align: center;
       padding: 30px;
@@ -280,6 +291,8 @@
       font-size: 14px;
     }
 
+
+    /* RESPONSIVE */
     @media (max-width: 860px) {
       .login-split {
         flex-direction: column;
@@ -310,125 +323,124 @@
     </a>
   </header>
 
-  <div class="register-wrapper">
+  <div class="login-wrapper">
     <div class="login-split">
-      <!-- Left Branding Panel -->
       <div class="login-branding">
         <div class="branding-content">
-          <h1>Join Speakora Today</h1>
-          <p>Create your free account and discover a structured, premium approach to language fluency.</p>
+          <h1>Welcome Back to Speakora</h1>
+          <p>Sign in to continue your structured language learning journey. Your progress and data are safely waiting
+            for you.</p>
           <ul class="feature-list">
             <li><span>📘</span> Structured, ad-free study materials</li>
-            <li><span>🎓</span> Formal Certification & Analytics</li>
+            <li><span>📊</span> Granular progress tracking</li>
             <li><span>🎤</span> Intelligent AI Conversation Tutor</li>
           </ul>
         </div>
       </div>
 
-      <!-- Right Form Panel -->
       <div class="container">
-        <h2>Create Account</h2>
-        <p>Start your language learning journey.</p>
+        <h2>Login</h2>
+        <p>Please enter your details to sign in</p>
 
-        <form>
-          <div class="input-group">
-            <span class="input-icon">👤</span>
-            <input id="u" placeholder="Username">
-          </div>
-          <div class="error" id="e1">Username required</div>
-
-          <div class="input-group">
-            <span class="input-icon">📝</span>
-            <input id="n" placeholder="Full Name">
-          </div>
-          <div class="error" id="e2">Full name required</div>
-
+        <form id="loginForm">
           <div class="input-group">
             <span class="input-icon">✉️</span>
-            <input id="m" placeholder="Email Address">
+            <input type="email" id="login-email" placeholder="Email address" required>
           </div>
-          <div class="error" id="e3">Valid email required</div>
-
-          <div class="input-group">
-            <span class="input-icon">📱</span>
-            <input id="p" placeholder="Phone Number (10 digits)">
-          </div>
-          <div class="error" id="e4">Phone must be 10 digits</div>
-
           <div class="input-group">
             <span class="input-icon">🔒</span>
-            <input type="password" id="pw" placeholder="Password (min 8 chars)">
+            <input type="password" id="login-password" placeholder="Password" required>
           </div>
-          <div class="error" id="e5">Password must be 8 characters</div>
-
-          <div class="input-group">
-            <span class="input-icon">🔐</span>
-            <input type="password" id="cpw" placeholder="Confirm Password">
-          </div>
-          <div class="error" id="e6">Passwords do not match</div>
-
-          <button type="button" onclick="registerUser()">Sign Up</button>
+          <button class="login-btn" type="submit">Sign In</button>
         </form>
 
-        <p class="login-link">
-          Already have an account? <a href="login.html">Sign In</a>
+        <p class="signup-link">
+          Don't have an account? <a href="register.html">Sign Up</a>
         </p>
-
       </div>
     </div>
   </div>
 
+
   <footer>© 2026 Speakora. All rights reserved.</footer>
 
   <script>
-    function hide() {
-      document.querySelectorAll(".error").forEach(e => e.style.display = "none");
-    }
+    document.getElementById("loginForm").addEventListener("submit", function (e) {
+      e.preventDefault();
 
-    function registerUser() {
-      hide();
+      const emailEl = document.getElementById("login-email");
+      const passEl = document.getElementById("login-password");
 
-      const u = document.getElementById("u").value.trim();
-      const n = document.getElementById("n").value.trim();
-      const m = document.getElementById("m").value.trim();
-      const p = document.getElementById("p").value.trim();
-      const pw = document.getElementById("pw").value;
-      const cpw = document.getElementById("cpw").value;
+      const email = emailEl ? emailEl.value.trim() : "";
+      const password = passEl ? passEl.value : "";
 
-      let ok = true;
+      console.log("Sending login:", { email, password });
 
-      if (!u) { e1.style.display = "block"; ok = false; }
-      if (!n) { e2.style.display = "block"; ok = false; }
-      if (!m || !m.includes("@")) { e3.style.display = "block"; ok = false; }
-      if (!/^\d{10}$/.test(p)) { e4.style.display = "block"; ok = false; }
-      if (pw.length < 8) { e5.style.display = "block"; ok = false; }
-      if (pw !== cpw) { e6.style.display = "block"; ok = false; }
+      if (!email || !password) {
+        alert("Please enter both email and password");
+        return;
+      }
 
-      if (!ok) return;
-
-      fetch("/api/user/register", {
+      fetch("/api/user/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          username: u,
-          name: n,
-          email: m,
-          phone: p,
-          password: pw
-        })
+        body: JSON.stringify({ email: email, password: password })
       })
-        .then(res => res.json())
-        .then(data => {
-          if (data.message === "User already exists") {
-            alert("User already exists. Please login.");
-          } else {
-            alert("Registered successfully");
-            window.location.href = "login.html";
+        .then(res => {
+          if (!res.ok) {
+            return res.json().then(data => { throw new Error(data.message || "Invalid credentials"); });
           }
+          return res.json();
         })
-        .catch(() => {
-          alert("Server error. Try again later.");
+        .then(user => {
+          // ✅ SAVE REQUIRED DATA
+          localStorage.setItem("loggedIn", "true");
+          localStorage.setItem("userId", user._id); // Ensure ID is saved!
+          localStorage.setItem("name", user.name);
+          localStorage.setItem("email", user.email);
+          localStorage.setItem("language", (user.languages && user.languages.length > 0) ? user.languages[0] : "English");
+          localStorage.setItem("languages", JSON.stringify(user.languages || []));
+          localStorage.setItem("subscription", user.subscription);
+
+          // NEW: Check for Deletion Grace Period
+          if (!handleDeletionGraceCheck()) return;
+
+          window.location.href = "course.html";
+        })
+        .catch((err) => {
+          alert(err.message || "Invalid email or password");
+          console.error("Login error:", err);
         });
+    });
+
+    // Helper to check deletion status
+    function handleDeletionGraceCheck() {
+      const isPending = localStorage.getItem("pendingDeletion") === "true";
+      if (!isPending) return true;
+
+      const requestTime = parseInt(localStorage.getItem("deletionRequestTime") || "0");
+      const fifteenDays = 15 * 24 * 60 * 60 * 1000;
+      const now = new Date().getTime();
+
+      if (now - requestTime > fifteenDays) {
+        alert("Your account has been permanently deleted after the 15-day grace period. Please contact support if this is unexpected.");
+        ['userId', 'currentUser', 'loggedIn', 'name', 'email', 'subscription', 'language', 'languages', 'pendingDeletion', 'deletionRequestTime'].forEach(k => localStorage.removeItem(k));
+        return false;
+      } else {
+        const daysLeft = Math.ceil((fifteenDays - (now - requestTime)) / (24 * 60 * 60 * 1000));
+        const reactivate = confirm(`Welcome back! Your account is scheduled for deletion in ${daysLeft} days.\n\nWould you like to reactivate your account and cancel the deletion process?`);
+
+        if (reactivate) {
+          localStorage.removeItem("pendingDeletion");
+          localStorage.removeItem("deletionRequestTime");
+          alert("Reactivation successful! Welcome back to Speakora.");
+          return true;
+        } else {
+          // User chose NOT to reactivate
+          ['userId', 'currentUser', 'loggedIn', 'name', 'email', 'subscription', 'language', 'languages', 'pendingDeletion', 'deletionRequestTime'].forEach(k => localStorage.removeItem(k)); // Keep them logged out
+          return false;
+        }
+      }
     }
   </script>
 

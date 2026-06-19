@@ -145,7 +145,7 @@ router.post("/google-callback", async (req, res) => {
 
   } catch (err) {
     console.error("Google Callback Error:", err);
-    res.redirect("/index.html?error=GoogleAuthFailed");
+    res.redirect("/login.html?error=GoogleAuthFailed");
   }
 });
 
