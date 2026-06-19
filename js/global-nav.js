@@ -8,15 +8,16 @@
 
 (function () {
   const currentPath = window.location.pathname.split("/").pop() || "index.html";
-  const excludedPages = ["login.html", "register.html", "index.html", "course.html", "dashboard.html", "coming-soon.html", "grammar-test.html", "vocab-test.html", "sentence-test.html", "listening-test.html", "writing-test.html", "pronunciation.html", ""];
+  const cleanPath = currentPath.replace(/\.html$/, "");
+  const excludedPages = ["login", "register", "index", "course", "dashboard", "coming-soon", "grammar-test", "vocab-test", "sentence-test", "listening-test", "writing-test", "pronunciation", ""];
 
   const userLang = localStorage.getItem("language") || "English";
-  if (userLang !== "English" && !excludedPages.includes(currentPath)) {
+  if (userLang !== "English" && !excludedPages.includes(cleanPath)) {
     window.location.href = "coming-soon.html";
     return;
   }
 
-  if (excludedPages.includes(currentPath) && currentPath !== "dashboard.html") return;
+  if (excludedPages.includes(cleanPath) && cleanPath !== "dashboard") return;
 
   // 1.5 Header & Data Isolation System
   (function () {
@@ -144,7 +145,7 @@
     </div>
     <div class="sidebar-nav">
       ${sidebarItems.map(item => `
-        <a href="${item.url}" class="nav-item-link ${currentPath === item.url ? 'active' : ''}">
+        <a href="${item.url}" class="nav-item-link ${currentPath.replace(/\.html$/, '') === item.url.replace(/\.html$/, '') ? 'active' : ''}">
           <i data-lucide="${item.icon}"></i>
           <span>${item.name}</span>
         </a>
